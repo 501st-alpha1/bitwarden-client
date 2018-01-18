@@ -33,15 +33,28 @@ class BitwardenClient{
     }
 
     static login(email, password){
-        return this.post('/connect/token', {
-            client_id:'web',
-            grant_type:'password',
-            password: password,
-            scope: 'api offline_access',
-            username: email
-        })
+        // Login to your Bitwarden Account
     }
 
+    static signup(email, password, passwordConfirmation){
+       // Sign up for a Bitwarden Account
+    }
+
+    static logout(){
+       // Log Out of your Bitwarden Account
+    }
+
+    static getPassword(id){
+       // Be able to get a password within bitwarden
+    }
+
+    static setPassword(id, value){
+        // Be able to set a password within bitwarden
+    }
+
+    static passwordReset(email){
+        // Be able to reset your master bitwarden password
+    }
 }
 BitwardenClient.settings = {
     baseUrl: 'https://api.bitwarden.com',
