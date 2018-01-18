@@ -1,0 +1,32 @@
+import { CipherType } from '../../enums/cipherType';
+import { CipherData } from '../data/cipherData';
+import { Attachment } from './attachment';
+import { Card } from './card';
+import { CipherString } from './cipherString';
+import Domain from './domain';
+import { Field } from './field';
+import { Identity } from './identity';
+import { Login } from './login';
+import { SecureNote } from './secureNote';
+declare class Cipher extends Domain {
+    id: string;
+    organizationId: string;
+    folderId: string;
+    name: CipherString;
+    notes: CipherString;
+    type: CipherType;
+    favorite: boolean;
+    organizationUseTotp: boolean;
+    edit: boolean;
+    localData: any;
+    login: Login;
+    identity: Identity;
+    card: Card;
+    secureNote: SecureNote;
+    attachments: Attachment[];
+    fields: Field[];
+    collectionIds: string[];
+    constructor(obj?: CipherData, alreadyEncrypted?: boolean, localData?: any);
+    decrypt(): Promise<any>;
+}
+export { Cipher };

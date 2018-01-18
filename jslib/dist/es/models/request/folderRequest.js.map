@@ -1,0 +1,1 @@
+{"version":3,"file":"folderRequest.js","sourceRoot":"","sources":["../../../../src/models/request/folderRequest.ts"],"names":[],"mappings":"AAEA;IAGI,YAAY,MAAc;QACtB,IAAI,CAAC,IAAI,GAAG,MAAM,CAAC,IAAI,CAAC,CAAC,CAAC,MAAM,CAAC,IAAI,CAAC,eAAe,CAAC,CAAC,CAAC,IAAI,CAAC;IACjE,CAAC;CACJ;AAED,OAAO,EAAE,aAAa,EAAE,CAAC;AACxB,MAAc,CAAC,aAAa,GAAG,aAAa,CAAC"}

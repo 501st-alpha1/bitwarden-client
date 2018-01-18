@@ -1,0 +1,1 @@
+{"version":3,"file":"collectionData.js","sourceRoot":"","sources":["../../../../src/models/data/collectionData.ts"],"names":[],"mappings":"AAEA;IAKI,YAAY,QAA4B;QACpC,IAAI,CAAC,EAAE,GAAG,QAAQ,CAAC,EAAE,CAAC;QACtB,IAAI,CAAC,cAAc,GAAG,QAAQ,CAAC,cAAc,CAAC;QAC9C,IAAI,CAAC,IAAI,GAAG,QAAQ,CAAC,IAAI,CAAC;IAC9B,CAAC;CACJ;AAED,OAAO,EAAE,cAAc,EAAE,CAAC;AACzB,MAAc,CAAC,cAAc,GAAG,cAAc,CAAC"}

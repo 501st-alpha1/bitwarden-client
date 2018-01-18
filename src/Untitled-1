@@ -1,0 +1,14 @@
+ 
+def makeKey(password, salt)
+  PBKDF2.new(:password => password, :salt => salt,
+    :iterations => 5000, :hash_function => OpenSSL::Digest::SHA256,
+    :key_length => (256 / 8)).bin_string
+end
+def hashedPassword(password, salt)
+  key = makeKey(password, salt)
+  Base64.strict_encode64(PBKDF2.new(:password => key, :salt => password,
+    :iterations => 1, :key_length => 256/8,
+    :hash_function => OpenSSL::Digest::SHA256).bin_string)
+end
+
+ hashedPassword("p4ssw0rd", "nobody@example.com")

@@ -1,0 +1,1 @@
+{"version":3,"file":"deviceTokenRequest.js","sourceRoot":"","sources":["../../../../src/models/request/deviceTokenRequest.ts"],"names":[],"mappings":"AAAA;IAGI;QACI,IAAI,CAAC,SAAS,GAAG,IAAI,CAAC;IAC1B,CAAC;CACJ;AAED,OAAO,EAAE,kBAAkB,EAAE,CAAC;AAC7B,MAAc,CAAC,kBAAkB,GAAG,kBAAkB,CAAC"}
