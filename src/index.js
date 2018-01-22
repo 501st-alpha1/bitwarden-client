@@ -16,9 +16,8 @@ class BitwardenClient{
                 resolve(response)
             })
         })
-            
     }
-        
+
     static get(url){
         return this.request('GET', url)
     }
