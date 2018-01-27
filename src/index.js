@@ -33,6 +33,31 @@ class BitwardenClient{
 
     static login(email, password){
         // Login to your Bitwarden Account
+        email = email.toLowerCase()
+
+        // FIXME: Pass storage service args to following constructor.
+        const service = new cryptoservice.CryptoService()
+        const key = service.makeKey(password, email)
+        const hashedPassword = service.hashPassword(password, key)
+
+        const request = {
+            email: email,
+            masterPasswordHash: hashedPassword,
+            provider: null,
+            token: null,
+            remember: null,
+            device: null
+        }
+        const body = {
+            grant_type: 'password',
+            username: email,
+            password: hashedPassword,
+            scope: 'api offline_access',
+            client_id: 'browser'
+        }
+        const url = 'https://identity.bitwarden.com/connect/token'
+
+        const response = this.post(url, body);
     }
 
     static signup(email, password, passwordConfirmation){
