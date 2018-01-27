@@ -16,9 +16,8 @@ class BitwardenClient{
                 resolve(response)
             })
         })
-            
     }
-        
+
     static get(url){
         return this.request('GET', url)
     }
@@ -34,26 +33,51 @@ class BitwardenClient{
 
     static login(email, password){
         // Login to your Bitwarden Account
+        email = email.toLowerCase()
+
+        // FIXME: Pass storage service args to following constructor.
+        const service = new cryptoservice.CryptoService()
+        const key = service.makeKey(password, email)
+        const hashedPassword = service.hashPassword(password, key)
+
+        const request = {
+            email: email,
+            masterPasswordHash: hashedPassword,
+            provider: null,
+            token: null,
+            remember: null,
+            device: null
+        }
+        const body = {
+            grant_type: 'password',
+            username: email,
+            password: hashedPassword,
+            scope: 'api offline_access',
+            client_id: 'browser'
+        }
+        const url = 'https://identity.bitwarden.com/connect/token'
+
+        const response = this.post(url, body);
     }
 
     static signup(email, password, passwordConfirmation){
-       // Sign up for a Bitwarden Account
+        // Sign up for a Bitwarden Account
     }
 
     static logout(){
-       // Log Out of your Bitwarden Account
+        // Log Out of your Bitwarden Account
     }
 
     static getPassword(id){
-       // Be able to get a password within bitwarden
+        // Get a password within Bitwarden
     }
 
     static setPassword(id, value){
-        // Be able to set a password within bitwarden
+        // Set a password within Bitwarden
     }
 
     static passwordReset(email){
-        // Be able to reset your master bitwarden password
+        // Reset your master Bitwarden password
     }
 }
 BitwardenClient.settings = {
