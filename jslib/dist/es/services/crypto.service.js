@@ -278,6 +278,7 @@ export class CryptoService {
     }
     decrypt(cipherString, key, outputEncoding = 'utf8') {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('key inside decript', key)
             const ivBytes = forge.util.decode64(cipherString.initializationVector);
             const ctBytes = forge.util.decode64(cipherString.cipherText);
             const macBytes = cipherString.mac ? forge.util.decode64(cipherString.mac) : null;
@@ -425,7 +426,11 @@ export class CryptoService {
     aesDecrypt(encType, ctBytes, ivBytes, macBytes, key) {
         return __awaiter(this, void 0, void 0, function* () {
             const keyForEnc = yield this.getKeyForEncryption(key);
+            console.log('keyForEnc', keyForEnc)
             const theKey = this.resolveLegacyKey(encType, keyForEnc);
+            console.log('encType', encType)
+            console.log('theKey.encType', theKey.encType)
+            console.log('theKey', theKey)
             if (encType !== theKey.encType) {
                 // tslint:disable-next-line
                 console.error('encType unavailable.');
@@ -524,11 +529,15 @@ export class CryptoService {
         });
     }
     resolveLegacyKey(encType, key) {
+        console.log('encType inside resolve legacy key', encType)
+        console.log('encType inside resolve legacy key', key)
         if (encType === EncryptionType.AesCbc128_HmacSha256_B64 &&
             key.encType === EncryptionType.AesCbc256_B64) {
             // Old encrypt-then-mac scheme, make a new key
+            console.log('Old encrypt-then-mac scheme, make a new key')
             this.legacyEtmKey = this.legacyEtmKey ||
                 new SymmetricCryptoKey(key.key, false, EncryptionType.AesCbc128_HmacSha256_B64);
+            console.log(this.legacyEtmKey)
             return this.legacyEtmKey;
         }
         return key;

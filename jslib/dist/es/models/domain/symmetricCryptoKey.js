@@ -4,6 +4,8 @@ import { SymmetricCryptoKeyBuffers } from './symmetricCryptoKeyBuffers';
 import { UtilsService } from '../../services/utils.service';
 export class SymmetricCryptoKey {
     constructor(keyBytes, b64KeyBytes, encType) {
+        console.log(encType)
+        console.log(keyBytes)
         if (b64KeyBytes) {
             keyBytes = forge.util.decode64(keyBytes);
         }
@@ -15,6 +17,7 @@ export class SymmetricCryptoKey {
             throw new Error('Couldn\'t make buffer');
         }
         const bufferLength = buffer.length();
+        console.log('bufferLength', bufferLength)
         if (encType == null) {
             if (bufferLength === 32) {
                 encType = EncryptionType.AesCbc256_B64;
