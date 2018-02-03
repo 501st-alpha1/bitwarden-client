@@ -70,7 +70,6 @@ class BitwardenClient{
         // Login to your Bitwarden Account
         email = email.toLowerCase()
 
-        // FIXME: Pass storage service args to following constructor.
         const service = this.crypto()
         const key = service.makeKey(password, email)
         return service.hashPassword(password, key).then((hashedPassword)=>{
