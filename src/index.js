@@ -26,7 +26,7 @@ class BitwardenClient{
               ...this.options,
               method
             }
-            
+
             const _request = new Request(url, options)
             fetch(_request, {
                 body: params
@@ -53,14 +53,12 @@ class BitwardenClient{
 
     static crypto(){
       return this.thecryptoservice = this.thecryptoservice || new cryptoservice.CryptoService(new StorageService(), new StorageService())
-    } 
+    }
     static encrypt(){
-
     }
     static decrypt(item){
-
       item = new CipherString(item)
-      
+
       const [encType, key] = this.settings.key.split('.')
       this.crypto().rsaDecrypt(key).then((result)=>{
         console.log('result of rsa Decrypt', result)
@@ -73,11 +71,9 @@ class BitwardenClient{
         email = email.toLowerCase()
 
         // FIXME: Pass storage service args to following constructor.
-
         const service = this.crypto()
         const key = service.makeKey(password, email)
         return service.hashPassword(password, key).then((hashedPassword)=>{
-          
           const request = {
             email: email,
             masterPasswordHash: hashedPassword,
@@ -93,9 +89,9 @@ class BitwardenClient{
           formData.append('password', hashedPassword)
           formData.append('scope', 'api offline_access')
           formData.append('client_id', 'web')
-          
+
           const url = '/connect/token'
-          
+
           const response = this.post('identity', url, formData);
 
           response.then((data)=>{
