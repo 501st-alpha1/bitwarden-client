@@ -3,6 +3,7 @@ import * as cryptoservice from '../jslib/dist/es/services/crypto.service'
 import { CipherString } from '../jslib/dist/es/models/domain/cipherString';
 import { FolderService } from '../jslib/dist/es/services/folder.service'
 import { SymmetricCryptoKey } from '../jslib/dist/es/models/domain/symmetricCryptoKey'
+import { TokenService } from '../jslib/dist/es/services/token.service'
 import { UserService } from '../jslib/dist/es/services/user.service'
 
 class StorageService {
@@ -132,7 +133,8 @@ class BitwardenClient{
         this.settings.privateKey = privateKey
     }
     static getPasswords(){
-        const userService = new UserService(null, this.storage())
+        const tokenService = new TokenService(this.storage())
+        const userService = new UserService(tokenService, this.storage())
         const noneFunction = function() {
             return "<none>"
         }
