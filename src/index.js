@@ -136,9 +136,9 @@ class BitwardenClient{
         const noneFunction = function() {
             return "<none>"
         }
-        const folder = new FolderService(this.crypto(), userService, noneFunction, null, this.storage())
+        const folderService = new FolderService(this.crypto(), userService, noneFunction, null, this.storage())
 
-        return folder.getAllDecrypted()
+        return folderService.getAllDecrypted()
     }
 
     static setPassword(id, value){
