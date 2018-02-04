@@ -53,8 +53,12 @@ class BitwardenClient{
         return this.request(subdomain, 'DELETE', url)
     }
 
+    static storage(){
+        return this.storageService = this.storageService || new StorageService()
+    }
+
     static crypto(){
-        return this.thecryptoservice = this.thecryptoservice || new cryptoservice.CryptoService(new StorageService(), new StorageService())
+        return this.thecryptoservice = this.thecryptoservice || new cryptoservice.CryptoService(this.storage(), this.storage())
     }
     static encrypt(){
     }
@@ -128,11 +132,11 @@ class BitwardenClient{
         this.settings.privateKey = privateKey
     }
     static getPasswords(){
-        const userService = new UserService(null, new StorageService())
+        const userService = new UserService(null, this.storage())
         const noneFunction = function() {
             return "<none>"
         }
-        const folder = new FolderService(this.crypto(), userService, noneFunction, null, new StorageService())
+        const folder = new FolderService(this.crypto(), userService, noneFunction, null, this.storage())
 
         return folder.getAllDecrypted()
     }
