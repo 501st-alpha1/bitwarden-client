@@ -3,6 +3,7 @@ import * as cryptoservice from '../jslib/dist/es/services/crypto.service'
 import { CipherString } from '../jslib/dist/es/models/domain/cipherString';
 import { FolderService } from '../jslib/dist/es/services/folder.service'
 import { SymmetricCryptoKey } from '../jslib/dist/es/models/domain/symmetricCryptoKey'
+import { SyncService } from '../jslib/dist/es/services/sync.service'
 import { TokenService } from '../jslib/dist/es/services/token.service'
 import { UserService } from '../jslib/dist/es/services/user.service'
 
@@ -18,6 +19,11 @@ class StorageService {
     }
 }
 
+class MessagingService {
+    send(message){
+        console.log(message);
+    }
+}
 
 class BitwardenClient{
     static request(subdomain, method, url, params){
@@ -139,6 +145,8 @@ class BitwardenClient{
             return "<none>"
         }
         const folderService = new FolderService(this.crypto(), userService, noneFunction, null, this.storage())
+        const syncService = new SyncService(userService, null, null, folderService, null, this.crypto(), null, this.storage(), new MessagingService(), null)
+        const sync = syncService.fullSync()
 
         return folderService.getAllDecrypted()
     }
