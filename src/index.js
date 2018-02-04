@@ -1,7 +1,9 @@
 import 'babel-polyfill'
 import * as cryptoservice from '../jslib/dist/es/services/crypto.service'
 import { CipherString } from '../jslib/dist/es/models/domain/cipherString';
+import { FolderService } from '../jslib/dist/es/services/folder.service'
 import { SymmetricCryptoKey } from '../jslib/dist/es/models/domain/symmetricCryptoKey'
+import { UserService } from '../jslib/dist/es/services/user.service'
 
 class StorageService {
     constructor(){
@@ -126,7 +128,13 @@ class BitwardenClient{
         this.settings.privateKey = privateKey
     }
     static getPasswords(){
-        return this.get('api', '/ciphers')
+        const userService = new UserService(null, new StorageService())
+        const noneFunction = function() {
+            return "<none>"
+        }
+        const folder = new FolderService(this.crypto(), userService, noneFunction, null, new StorageService())
+
+        return folder.getAllDecrypted()
     }
 
     static setPassword(id, value){
