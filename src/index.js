@@ -112,6 +112,7 @@ class BitwardenClient{
     }
     static setKey(key){
         this.settings.key = key
+        this.crypto().setKey(key)
     }
     static setToken(token){
         this.setHeaders({
